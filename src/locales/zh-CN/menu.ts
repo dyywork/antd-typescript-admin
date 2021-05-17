@@ -6,6 +6,7 @@ export default {
   'menu.system': '系统管理',
   'menu.system.userList': '用户列表',
   'menu.system.dutyList': '职责列表',
+  'menu.system.createEditDuty': '新建职责',
   'menu.system.roleList': '角色列表',
   'menu.system.menuList': '菜单管理',
   'menu.admin.sub-page': '二级管理页',

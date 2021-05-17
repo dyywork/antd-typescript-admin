@@ -72,6 +72,12 @@
                 component: './System/DutyList',
               },
               {
+                path: '/system/createEditDuty',
+                name: 'createEditDuty',
+                component: './System/CreateEditDuty',
+                hideInMenu:true,
+              },
+              {
                 path: '/system/menuList',
                 name: 'menuList',
                 component: './System/MenuList',

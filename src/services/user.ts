@@ -30,6 +30,20 @@ export async function queryDutyList(params: any): Promise<any> {
     params
   });
 }
+// 新增职责
+export async function createDuty(data: any): Promise<any> {
+  return request('/api/system/createDuty', {
+    method: 'post',
+    data
+  });
+}
+// 职责详情
+export async function detailDuty(data: any): Promise<any> {
+  return request('/api/system/detail', {
+    method: 'get',
+    params:data
+  });
+}
 // 角色列表
 export async function queryRoleList(params: any): Promise<any> {
   return request('/api/system/roleList', {

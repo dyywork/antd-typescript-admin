@@ -23,6 +23,7 @@ export interface ConnectState {
   settings: ProSettings;
   user: UserModelState;
   login: StateType;
+  system: any;
 }
 
 export interface Route extends MenuDataItem {

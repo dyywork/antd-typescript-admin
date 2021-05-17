@@ -2,24 +2,20 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import ProTable, {ActionType} from '@ant-design/pro-table';
-import React, {useState, useRef} from 'react';
-import {Dispatch, connect} from 'umi';
+import React, { useRef} from 'react';
+import {Dispatch, connect, Link, history} from 'umi';
 import { queryDutyList } from '@/services/user';
-import CreateEditUser from '@/pages/System/components/CreateEditUser';
 import { ConnectState } from '@/models/connect';
+// import Link from 'umi/link';
 
 interface SystemProps {
   dispatch: Dispatch;
 }
 
-const DutyList: React.FC<SystemProps> = (props) => {
-  const {dispatch} = props;
+const DutyList: React.FC<SystemProps> = () => {
   const ref = useRef<ActionType>();
-  const [createModalVisible, handleModalVisible] = useState<boolean>(false);
-  const [row, setRow] = useState<Object>({});
-  const editTable = (data: Object) => {
-    setRow(data);
-    handleModalVisible(true)
+  const editTable = (data: any) => {
+    history.push(`/system/createEditDuty?id=${data.id}`);
   }
   const columns: any = [
     {
@@ -58,22 +54,8 @@ const DutyList: React.FC<SystemProps> = (props) => {
   ];
 
 
-
-  const reloadTable = () => {
-    ref.current?.reload();
-  }
-
-  const createParams: any = {
-    isModalVisible: createModalVisible,
-    handleCancel: handleModalVisible,
-    dispatch,
-    reloadTable,
-    row,
-  }
-
   return (
     <PageContainer>
-      {createModalVisible && <CreateEditUser {...createParams} />}
       <ProTable
         headerTitle="职责列表"
         rowKey="id"
@@ -83,12 +65,11 @@ const DutyList: React.FC<SystemProps> = (props) => {
           {defaultPageSize: 10,}
         }
         toolBarRender={() => [
-          <Button type="primary" onClick={() => {
-            handleModalVisible(true)
-            setRow({})
-          }} >
-            <PlusOutlined/> 新建
-          </Button>,
+          <Link to="/system/createEditDuty">
+            <Button type="primary" >
+              <PlusOutlined/> 新建
+            </Button>
+          </Link>,
         ]}
         request={(params, sorter, filter) => queryDutyList({ ...params, sorter, filter })}
       />
